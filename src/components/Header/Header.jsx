@@ -1,11 +1,11 @@
 import React from 'react';
-import { images } from '../../constants';
+import { images } from '../../constants/index';
 
 const Header = () => {
 	return <section>
 		<header>
 			<div>
-				<img src={images.Logo} alt="" />
+				<img src={images.logo} alt="logo" />
 			</div>
 			<div></div>
 		</header>
