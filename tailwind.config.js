@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
-  theme: {
-    extend: {
-		colors: {
+	content: ['./src/**/*.{js,jsx,ts,tsx}'],
+	theme: {
+		extend: {
+			colors: {
 				primary: '#5800FF',
 				dark: {
 					light: '#5A7184',
@@ -15,7 +15,7 @@ module.exports = {
 				opensans: ["'Open Sans'", 'sans-serif'],
 				roboto: ["'Roboto'", 'sans-serif'],
 			},
+		},
 	},
-  },
-  plugins: [],
-}
+	plugins: [],
+};
