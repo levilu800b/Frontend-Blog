@@ -1,8 +1,12 @@
 import React from 'react'
 
+import { images } from '../../constants/index'
+
 const ArticleCard = () => {
   return (
-    <div>ArticleCard</div>
+    <div>
+        <img src={images.PostImage} alt='title' />
+    </div>
   )
 }
 
