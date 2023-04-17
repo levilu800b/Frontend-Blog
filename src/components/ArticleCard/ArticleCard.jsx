@@ -29,11 +29,13 @@ const ArticleCard = ({ className}) => {
 								<span className='bg-[#36B37E] w-fit bg-opacity-20 p-1.5 rounded-full'>
 									<BsCheckLg className='w-1.5 h-1.5 text-[#36B37E]'/>
 									</span>
-								<span></span>
+								<span className='italic text-dark-light text-xs'>
+									Verified writer
+								</span>
 							</div>
 						</div>
 					</div>
-					<span>02 May</span>
+					<span className='font-bold text-dark-light italic text-sm'>02 May</span>
 				</div>
 			</div>
 		</div>
