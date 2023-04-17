@@ -1,4 +1,5 @@
 import React from 'react'
+import {BsCheckLg} from 'react-icons/bs'
 
 import { images } from '../../constants/index'
 
@@ -20,6 +21,17 @@ const ArticleCard = ({ className}) => {
 				<div className='flex justify-between flex-nowrap items-center mt-6'>
 					<div className='flex items-center gap-x-2'>
 						<img src={images.PostProfileImage} alt="" />
+						<div className='flex flex-col'>
+							<h4 className='font-bold italic text-dark-soft text-sm'>
+								Jasper Micheals
+							</h4>
+							<div className='flex items-center gap-x-2'>
+								<span className='bg-[#36B37E] w-fit bg-opacity-20 p-1.5 rounded-full'>
+									<BsCheckLg className='w-1.5 h-1.5 text-[#36B37E]'/>
+									</span>
+								<span></span>
+							</div>
+						</div>
 					</div>
 					<span>02 May</span>
 				</div>
