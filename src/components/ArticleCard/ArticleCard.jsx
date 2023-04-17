@@ -17,7 +17,7 @@ const ArticleCard = ({ className}) => {
 				<h2 className="font-roboto font-bold text-xl text-dark-soft">
 					Future of Work
 				</h2>
-				<p className='text-dark-light mt-3 text-sm '>Majority of people will work in jobs that don’t exist today.</p>
+				<p className='text-dark-light mt-3 text-sm'>Majority of people will work in jobs that don’t exist today.</p>
 				<div className='flex justify-between flex-nowrap items-center mt-6'>
 					<div className='flex items-center gap-x-2'>
 						<img src={images.PostProfileImage} alt="" />
