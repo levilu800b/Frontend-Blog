@@ -11,7 +11,7 @@ const ArticleCard = ({ className}) => {
 			<img
 				src={images.PostImage}
 				alt="title"
-				className="w-full object-cover object-center h-auto md:h-52"
+				className="w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-60"
 			/>
 			<div className="p-5">
 				<h2 className="font-roboto font-bold text-xl text-dark-soft md:text-2xl">
