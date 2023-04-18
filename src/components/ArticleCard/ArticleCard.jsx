@@ -1,7 +1,7 @@
-import React from 'react'
-import {BsCheckLg} from 'react-icons/bs'
+import React from 'react';
+import {BsCheckLg} from 'react-icons/bs';
 
-import { images } from '../../constants/index'
+import { images } from '../../constants/index';
 
 const ArticleCard = ({ className}) => {
   return (
