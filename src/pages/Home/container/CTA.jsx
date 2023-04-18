@@ -46,21 +46,23 @@ const CTA = () => {
 						</p>
 					</div>
 					<div className="col-span-12 hidden mb-[70px] md:block md:order-first">
-						<div
-							className='w-full rounded-xl bg-white p-3 z-[1] relative'
-						>
-							<img
-								src={images.CtaImage}
-								alt="title"
-								className="w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-60"
-							/>
-							<div className="p-5">
-								<h2 className="font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-[28px]">
-									Future of Work
-								</h2>
-								<p className="text-dark-light mt-3 text-sm md:text-lg">
-									Majority of people will work in jobs that don’t exist today.
-								</p>
+						<div className='w-3/4 mx-auto relative'>
+                            <div className='w-1/2 h-1/2 bg-[#FC5A5A] rounded-lg absolute top-[10%] -right-[8%]'/>
+                            <div className='w-1/2 h-1/2 bg-white rounded-lg opacity-[.06] absolute -bottom-[10%] -left-[8%]'/>
+							<div className="w-full rounded-xl bg-white p-3 z-[1] relative">
+								<img
+									src={images.CtaImage}
+									alt="title"
+									className="w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-60"
+								/>
+								<div className="p-5">
+									<h2 className="font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-[28px]">
+										Future of Work
+									</h2>
+									<p className="text-dark-light mt-3 text-sm md:text-lg">
+										Majority of people will work in jobs that don’t exist today.
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
