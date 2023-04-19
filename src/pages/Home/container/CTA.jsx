@@ -22,23 +22,23 @@ const CTA = () => {
 			</svg>
 
 			<section className="relative bg-dark-soft px-5">
-				<div className="container grid grid-cols-12 mx-auto py-10">
+				<div className="container grid grid-cols-12 mx-auto py-10 md:pd-20">
 					<div className="col-span-12">
-						<h2 className="text-white font-roboto font-bold text-2xl">
+						<h2 className="text-white font-roboto font-bold text-2xl md:text-4xl md:text-center md:leading-normal">
 							Get our stories delivered from us to your inbox weekly.
 						</h2>
-						<div className="w-full max-w-[494px] mt-12 space-y-3 mx-auto">
+						<div className="w-full max-w-[494px] mt-12 space-y-3 mx-auto md:space-y-0 md:flex md:items-center md:space-x-2">
 							<input
 								type="text"
-								className="px-4 py-4 rounded-lg w-full placeholder:text-dark-light"
+								className="px-4 py-3 rounded-lg w-full placeholder:text-dark-light"
 								placeholder="Your Email"
 							/>
-							<button className="px-4 py-3 rounded-lg w-full bg-primary text-white font-bold">
+							<button className="px-4 py-3 rounded-lg w-full bg-primary text-white font-bold md:w-fit md:whitespace-nowrap">
 								Get started
 							</button>
 						</div>
-						<p className="text-dark-light text-sm leading-7 mt-6">
-							<span className="font-bold italic text-[#B3BAC5]">
+						<p className="text-dark-light text-sm leading-7 mt-6 md:text-center md:text-base">
+							<span className="font-bold italic text-[#B3BAC5] md:not-italic md:font-normal md:text-dark-light">
 								Get a response tomorrow
 							</span>{' '}
 							if you submit by 9pm today. If we received after 9pm will get a
@@ -57,10 +57,10 @@ const CTA = () => {
 								/>
 								<div className="p-5">
 									<h2 className="font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-[28px]">
-										Future of Work
+										The Best articles every week
 									</h2>
 									<p className="text-dark-light mt-3 text-sm md:text-lg">
-										Majority of people will work in jobs that don’t exist today.
+										Our insurance plans offers are priced the same everywhere else.
 									</p>
 								</div>
 							</div>
