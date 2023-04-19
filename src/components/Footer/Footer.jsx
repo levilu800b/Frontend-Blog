@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
 	return (
 		<section className="bg-dark-soft">
-			<footer className="container mx-auto grid grid-cols-10 px-5 py-10">
+			<footer className="container mx-auto grid grid-cols-10 px-5 py-10 gap-y-10 gap-x-5">
 				<div className="col-span-5">
 					<h3 className="text-dark-light font-bold">Product</h3>
 					<ul className="text-[#959EAD] text-sm mt-5 space-y-4">
@@ -25,62 +25,53 @@ const Footer = () => {
 					</ul>
 				</div>
 				<div className="col-span-5">
-					<h3 className="text-dark-light font-bold">Product</h3>
+					<h3 className="text-dark-light font-bold">Services</h3>
 					<ul className="text-[#959EAD] text-sm mt-5 space-y-4">
-						<li>
-							<a href="/">Landing Page</a>
-						</li>
-						<li>
-							<a href="/">Features</a>
-						</li>
 						<li>
 							<a href="/">Documentation</a>
 						</li>
 						<li>
-							<a href="/">Referral Program</a>
+							<a href="/">Design</a>
 						</li>
 						<li>
-							<a href="/">Pricing</a>
+							<a href="/">Themes</a>
+						</li>
+						<li>
+							<a href="/">Illustration</a>
+						</li>
+						<li>
+							<a href="/">UI kit</a>
 						</li>
 					</ul>
 				</div>
 				<div className="col-span-5">
-					<h3 className="text-dark-light font-bold">Product</h3>
+					<h3 className="text-dark-light font-bold">Company</h3>
 					<ul className="text-[#959EAD] text-sm mt-5 space-y-4">
 						<li>
-							<a href="/">Landing Page</a>
+							<a href="/">About</a>
 						</li>
 						<li>
-							<a href="/">Features</a>
+							<a href="/">Terms</a>
 						</li>
 						<li>
-							<a href="/">Documentation</a>
+							<a href="/">Privacy Policy</a>
 						</li>
 						<li>
-							<a href="/">Referral Program</a>
-						</li>
-						<li>
-							<a href="/">Pricing</a>
+							<a href="/">Careers</a>
 						</li>
 					</ul>
 				</div>
 				<div className="col-span-5">
-					<h3 className="text-dark-light font-bold">Product</h3>
+					<h3 className="text-dark-light font-bold">More</h3>
 					<ul className="text-[#959EAD] text-sm mt-5 space-y-4">
-						<li>
-							<a href="/">Landing Page</a>
-						</li>
-						<li>
-							<a href="/">Features</a>
-						</li>
 						<li>
 							<a href="/">Documentation</a>
 						</li>
 						<li>
-							<a href="/">Referral Program</a>
+							<a href="/">License</a>
 						</li>
 						<li>
-							<a href="/">Pricing</a>
+							<a href="/">Changelog</a>
 						</li>
 					</ul>
 				</div>
