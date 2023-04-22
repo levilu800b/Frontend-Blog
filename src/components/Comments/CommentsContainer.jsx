@@ -1,8 +1,11 @@
 import React from 'react'
+import CommentForm from './CommentForm'
 
 const CommentsContainer = ({ className }) => {
   return (
-    <div className={`${className}`}></div>
+    <div className={`${className}`}>
+        <CommentForm btnLabel="Send" />
+    </div>
   )
 }
 
