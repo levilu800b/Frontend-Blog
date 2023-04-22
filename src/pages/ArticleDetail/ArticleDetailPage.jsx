@@ -12,36 +12,46 @@ const breadCrumbsData = [
 ];
 
 const postsData = [
-    {
-    _id: "1",
-    image: images.PostImage,
-    title: "Help children get better education",
-    createdAt: "2023-01-28T15:35:53.607+0000",
-  },
-  {
-    _id: "2",
-    image: images.PostImage,
-    title: "Help children get better education",
-    createdAt: "2023-01-28T15:35:53.607+0000",
-  },
-  {
-    _id: "3",
-    image: images.PostImage,
-    title: "Help children get better education",
-    createdAt: "2023-01-28T15:35:53.607+0000",
-  },
-  {
-    _id: "4",
-    image: images.PostImage,
-    title: "Help children get better education",
-    createdAt: "2023-01-28T15:35:53.607+0000",
-  },
-]
+	{
+		_id: '1',
+		image: images.PostImage,
+		title: 'Help children get better education',
+		createdAt: '2023-01-28T15:35:53.607+0000',
+	},
+	{
+		_id: '2',
+		image: images.PostImage,
+		title: 'Help children get better education',
+		createdAt: '2023-01-28T15:35:53.607+0000',
+	},
+	{
+		_id: '3',
+		image: images.PostImage,
+		title: 'Help children get better education',
+		createdAt: '2023-01-28T15:35:53.607+0000',
+	},
+	{
+		_id: '4',
+		image: images.PostImage,
+		title: 'Help children get better education',
+		createdAt: '2023-01-28T15:35:53.607+0000',
+	},
+];
+
+const tagsData = [
+	'Medical',
+	'Lifestyle',
+	'Learn',
+	'Healthy',
+	'Food',
+	'Diet',
+	'Education',
+];
 
 const ArticleDetailPage = () => {
 	return (
 		<MainLayout>
-			<section className="container mx-auto max-w-5xl flex flex-col px-5 py-5">
+			<section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
 				<article className="flex-1">
 					<BreadCrumbs data={breadCrumbsData} />
 					<img
@@ -51,11 +61,11 @@ const ArticleDetailPage = () => {
 					/>
 					<Link
 						to="/blog?category=selectedCategory"
-						className="text-primary text-sm font-roboto inline-block mt-4"
+						className="text-primary text-sm font-roboto inline-block mt-4 md:text-base"
 					>
 						EDUCATION
 					</Link>
-					<h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard">
+					<h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
 						Youths needs to get into better Education
 					</h1>
 					<div className="mt-4 text-dark-soft">
@@ -70,7 +80,12 @@ const ArticleDetailPage = () => {
 						</p>
 					</div>
 				</article>
-                <SuggestedPosts header='Latest Article' posts={postsData} />
+				<SuggestedPosts
+					header="Latest Article"
+					posts={postsData}
+					tags={tagsData}
+					className="mt-8 lg:mt-0 lg:max-w-xs"
+				/>
 			</section>
 		</MainLayout>
 	);
