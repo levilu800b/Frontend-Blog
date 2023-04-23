@@ -4,7 +4,7 @@ import Comment from './Comment';
 import { getCommentsData } from '../../data/comments';
 import CommentForm from './CommentForm';
 
-const CommentsContainer = ({ className }) => {
+const CommentsContainer = ({ className, loggedInUserId }) => {
 	const [comments, setComments] = useState([]);
 	const mainComments = comments.filter((comment) => comment.parent === null);
 
@@ -43,7 +43,7 @@ const CommentsContainer = ({ className }) => {
 			/>
             <div className='space-y-4 mt-8'>
                 {mainComments.map((comment) => (
-                    <Comment />
+                    <Comment comment={comment} loggedInUserId={loggedInUserId} />
                 ))}
             </div>
 		</div>
