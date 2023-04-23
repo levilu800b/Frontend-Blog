@@ -34,7 +34,29 @@ const CommentsContainer = ({ className, loggedInUserId }) => {
 		setComments((currentState) => {
 			return [newComment, ...currentState];
 		});
+        setAffectedComment(null);
 	};
+
+    const updateCommentHandler = (value, commentId) => {
+        const updatedComments = comments.map((comment) => {
+            if (comment._id === commentId) {
+                return {
+                    ...comment,
+                    desc: value,
+                };
+            }
+            return comment;
+        });
+        setComments(updatedComments);
+        setAffectedComment(null);
+    };
+
+    const deleteCommentHandler = (commentId) => {
+        const updatedComments = comments.filter((comment) => {
+            return comment._id !== commentId;
+        })
+        setComments(updatedComments);
+    };
 
 	return (
 		<div className={`${className}`}>
@@ -45,11 +67,14 @@ const CommentsContainer = ({ className, loggedInUserId }) => {
 			<div className="space-y-4 mt-8">
 				{mainComments.map((comment) => (
 					<Comment
+                        key={comment._id}
 						comment={comment}
 						loggedInUserId={loggedInUserId}
 						affectedComment={affectedComment}
 						setAffectedComment={setAffectedComment}
 						addComment={addCommentHandler}
+                        updateComment={updateCommentHandler}
+                        deleteComment={deleteCommentHandler}
 					/>
 				))}
 			</div>
