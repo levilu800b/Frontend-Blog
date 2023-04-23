@@ -5,6 +5,7 @@ import { images } from '../../constants/index';
 import { Link } from 'react-router-dom';
 import SuggestedPosts from './container/SuggestedPosts';
 import CommentsContainer from '../../components/Comments/CommentsContainer';
+import SocialShareButtons from '../../components/SocialShareButton/SocialShareButtons';
 
 const breadCrumbsData = [
 	{ name: 'Home', link: '/' },
@@ -89,8 +90,14 @@ const ArticleDetailPage = () => {
 						tags={tagsData}
 						className="mt-8 lg:mt-0 lg:max-w-xs"
 					/>
-					<div className='mt-7'>
-						<h2 className='font-roboto font-medium text-dark-hard mb-4 md:text-xl'>Share on:</h2>
+					<div className="mt-7">
+						<h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
+							Share on:
+						</h2>
+						<SocialShareButtons
+							url={encodeURI('https://roadmap.sh/frontend')}
+							title={encodeURIComponent('Frontend Developer road map')}
+						/>
 					</div>
 				</div>
 			</section>

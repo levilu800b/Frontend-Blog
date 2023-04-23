@@ -1,5 +1,9 @@
 import React from 'react';
-import { AiOutlineTwitter, AiFillInstagram } from 'react-icons/ai';
+import {
+	AiOutlineTwitter,
+	AiFillInstagram,
+	AiFillLinkedin
+} from 'react-icons/ai';
 import { FaFacebook } from 'react-icons/fa';
 import { BsTelegram } from 'react-icons/bs';
 import { TbHeartHandshake } from 'react-icons/tb';
@@ -111,6 +115,11 @@ const Footer = () => {
 						<li>
 							<a href="/">
 								<BsTelegram className="w-6 h-auto" />
+							</a>
+						</li>
+						<li>
+							<a href="/">
+								<AiFillLinkedin className="w-6 h-auto" />
 							</a>
 						</li>
 					</ul>
