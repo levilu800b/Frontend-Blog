@@ -20,7 +20,7 @@ const CommentsContainer = ({ className, loggedInUserId }) => {
 
 	const addCommentHandler = (value, parent = null, replyOnUser = null) => {
 		const newComment = {
-			_id: '10',
+			_id: Math.random().toString(),
 			user: {
 				_id: 'a',
 				name: 'Mohammad Rezaii',
@@ -29,7 +29,7 @@ const CommentsContainer = ({ className, loggedInUserId }) => {
 			post: '1',
 			parent: parent,
 			replyOnUser: replyOnUser,
-			createdAt: '2022-12-31T17:22:05.092+0000',
+			createdAt: new Date().toISOString(),
 		};
 		setComments((currentState) => {
 			return [newComment, ...currentState];
@@ -58,6 +58,15 @@ const CommentsContainer = ({ className, loggedInUserId }) => {
         setComments(updatedComments);
     };
 
+    const getRepliesHandler = (commentId) => {
+        return comments.filter((comment) => comment.parent === commentId)
+        .sort((a, b) => {
+            return ( 
+                new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+        })
+    }
+
 	return (
 		<div className={`${className}`}>
 			<CommentForm
@@ -75,6 +84,7 @@ const CommentsContainer = ({ className, loggedInUserId }) => {
 						addComment={addCommentHandler}
                         updateComment={updateCommentHandler}
                         deleteComment={deleteCommentHandler}
+                        replies={getRepliesHandler(comment._id)}
 					/>
 				))}
 			</div>

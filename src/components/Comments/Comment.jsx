@@ -12,7 +12,8 @@ const Comment = ({
 	addComment,
 	parentId = null,
 	updateComment,
-    deleteComment,
+	deleteComment,
+	replies,
 }) => {
 	const isUserLoggedIn = Boolean(loggedInUserId);
 	const commentBelongsToUser = loggedInUserId === comment.user._id;
@@ -100,6 +101,24 @@ const Comment = ({
 						}
 						formCancelHandler={() => setAffectedComment(null)}
 					/>
+				)}
+				{replies.length > 0 && (
+					<div>
+						{replies.map((reply) => (
+							<Comment
+								key={reply._id}
+								addComment={addComment}
+								affectedComment={affectedComment}
+								setAffectedComment={setAffectedComment}
+								comment={reply}
+								deleteComment={deleteComment}
+								loggedInUserId={loggedInUserId}
+								replies={[]}
+                                updateComment={updateComment}
+                                parentId={comment._id}
+							/>
+						))}
+					</div>
 				)}
 			</div>
 		</div>
