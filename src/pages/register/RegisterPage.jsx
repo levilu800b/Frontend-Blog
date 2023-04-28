@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import MainLayout from '../../components/MainLayout/MainLayout';
 import { signup } from '../../services/index/users';
-import { userActions } from '../../store/reducers/userReduces';
+import { userActions } from '../../store/reducers/userReducers';
 
 const RegisterPage = () => {
 	const navigate = useNavigate();
