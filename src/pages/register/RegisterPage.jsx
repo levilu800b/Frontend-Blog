@@ -1,31 +1,49 @@
-import React from 'react'
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import MainLayout from '../../components/MainLayout/MainLayout'
 import { Link } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+
+import MainLayout from '../../components/MainLayout/MainLayout';
+import { signup } from '../../services/index/users';
 
 const RegisterPage = () => {
-    const {
-			register,
-			handleSubmit,
-			formState: { errors, isValid },
-			watch,
-		} = useForm({
-			defaultValues: {
-				name: '',
-				email: '',
-				password: '',
-				confirmPassword: '',
-			},
-            mode: 'onChange',
-		});
+	const { mutate, isLoading } = useMutation({
+		mutationFn: ({ name, email, password }) => {
+			return signup({ name, email, password });
+		},
+		onSuccess: (data) => {
+			console.log(data);
+		},
+		onError: (error) => {
+			toast.error(error.message);
+			console.log(error);
+		}
+	});
 
-    const submitHandler = (data) => {
-        console.log(data);
-    }
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isValid },
+		watch,
+	} = useForm({
+		defaultValues: {
+			name: '',
+			email: '',
+			password: '',
+			confirmPassword: '',
+		},
+		mode: 'onChange',
+	});
 
-    const password = watch('password');
+	const submitHandler = (data) => {
+		const { name, email, password } = data;
+		mutate({ name, email, password });
+	};
 
-  return (
+	const password = watch('password');
+
+	return (
 		<MainLayout>
 			<section className="container mx-auto px-5 py-10">
 				<div className="w-full max-w-sm mx-auto">
@@ -107,15 +125,15 @@ const RegisterPage = () => {
 								type="password"
 								id="password"
 								{...register('password', {
-                                    minLength: {
-                                        value: 6,
-                                        message: 'Password length must be at least 6 characters',
-                                    },
-                                    required: {
-                                        value: true,
-                                        message: 'Password is required',
-                                    },
-                                })}
+									minLength: {
+										value: 6,
+										message: 'Password length must be at least 6 characters',
+									},
+									required: {
+										value: true,
+										message: 'Password is required',
+									},
+								})}
 								placeholder="Enter password"
 								className={`placeholder:text-[#959EAD] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border ${
 									errors.password ? 'border-red-500' : 'border-[#C3CAD9]'
@@ -138,26 +156,26 @@ const RegisterPage = () => {
 								type="password"
 								id="confirmPassword"
 								{...register('confirmPassword', {
-                                    validate: (value) => {
-                                        if(value !== password) {
-                                            return 'Password does not match'
-                                        }
-                                    },
-                                    required: {
-                                        value: true,
-                                        message: 'Confirm password is required',
-                                    },
-                                })}
+									validate: (value) => {
+										if (value !== password) {
+											return 'Password does not match';
+										}
+									},
+									required: {
+										value: true,
+										message: 'Confirm password is required',
+									},
+								})}
 								placeholder="Enter confirm password"
 								className={`placeholder:text-[#959EAD] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border ${
 									errors.confirmPassword ? 'border-red-500' : 'border-[#C3CAD9]'
 								}`}
 							/>
-                            {errors.confirmPassword?.message && (
-                                <p className="text-red-500 text-xs mt-1">
-                                    {errors.confirmPassword?.message}
-                                </p>
-                            )}
+							{errors.confirmPassword?.message && (
+								<p className="text-red-500 text-xs mt-1">
+									{errors.confirmPassword?.message}
+								</p>
+							)}
 						</div>
 						<Link
 							to="/forgot-password"
@@ -167,7 +185,7 @@ const RegisterPage = () => {
 						</Link>
 						<button
 							type="submit"
-                            disabled={!isValid}
+							disabled={!isValid || isLoading}
 							className="bg-primary text-white font-bold text-lg py-4 px-8 w-full rounded-lg my-6 disabled:opacity-70 disabled:cursor-not-allowed"
 						>
 							Register
@@ -184,6 +202,6 @@ const RegisterPage = () => {
 			</section>
 		</MainLayout>
 	);
-}
+};
 
-export default RegisterPage
+export default RegisterPage;
