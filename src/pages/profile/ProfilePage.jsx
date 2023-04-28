@@ -9,14 +9,19 @@ import { getUserProfile } from '../../services/index/users';
 
 const ProfilePage = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	//const dispatch = useDispatch();
 	const userState = useSelector((state) => state.user);
 
-    const {} = useQuery({
-        queryFn: () => {
-            return getUserProfile()
-        }
-    })
+	const {
+		data: profileData,
+		isLoading: profileIsLoading,
+		error: profileError,
+	} = useQuery({
+		queryFn: () => {
+			return getUserProfile({ token: userState.userInfo.token });
+		},
+		queryKey: ['profile'],
+	});
 
 	useEffect(() => {
 		if (!userState.userInfo) {
@@ -34,12 +39,14 @@ const ProfilePage = () => {
 			email: '',
 			password: '',
 		},
+        values: {
+            name: profileIsLoading ? "" : profileData.name,
+            email: profileIsLoading ? "" : profileData.email,
+        },
 		mode: 'onChange',
 	});
 
-	const submitHandler = (data) => {
-		
-	};
+	const submitHandler = (data) => {};
 
 	return (
 		<MainLayout>
@@ -142,7 +149,7 @@ const ProfilePage = () => {
 						</div>
 						<button
 							type="submit"
-							disabled={!isValid}
+							disabled={!isValid || profileIsLoading}
 							className="bg-primary text-white font-bold text-lg py-4 px-8 w-full rounded-lg mb-6 disabled:opacity-70 disabled:cursor-not-allowed"
 						>
 							Register
