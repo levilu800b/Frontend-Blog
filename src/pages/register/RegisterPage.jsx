@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { signup } from '../../services/index/users';
 import { userActions } from '../../store/reducers/userReduces';
 
 const RegisterPage = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const userState = useSelector(state => state.user)
 
@@ -29,8 +30,10 @@ const RegisterPage = () => {
 	});
 
 	useEffect(() => {
-
-	}, [])
+		if (userState.userInfo) {
+			navigate('/');
+		}
+	}, [navigate, userState.userInfo])
 
 	const {
 		register,
