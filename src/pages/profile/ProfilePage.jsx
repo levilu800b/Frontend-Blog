@@ -2,15 +2,21 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
 
 import MainLayout from '../../components/MainLayout/MainLayout';
-import { getUserProfile } from '../../services/index/users';
+import { getUserProfile, updateProfile } from '../../services/index/users';
 import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
+import { userActions } from '../../store/reducers/userReducers';
+import { toast } from 'react-hot-toast';
+
+
 
 const ProfilePage = () => {
 	const navigate = useNavigate();
-	//const dispatch = useDispatch();
+	const dispatch = useDispatch();
+    const queryClient = useQueryClient();
 	const userState = useSelector((state) => state.user);
 
 	const {
@@ -23,6 +29,29 @@ const ProfilePage = () => {
 		},
 		queryKey: ['profile'],
 	});
+
+    const { mutate, isLoading: updateProfileIsLoading } = useMutation({
+			mutationFn: ({ name, email, password }) => {
+				return updateProfile({
+                    token: userState.userInfo.token,
+                    userData: {
+                        name,
+                        email,
+                        password,
+                    },
+                });
+			},
+			onSuccess: (data) => {
+				dispatch(userActions.setUserInfo(data));
+				localStorage.setItem('account', JSON.stringify(data));
+                queryClient.invalidateQueries(['profile']);
+				toast.success('Profile updated successfully');
+			},
+			onError: (error) => {
+				toast.error(error.message);
+				console.log(error);
+			},
+		});
 
 	useEffect(() => {
 		if (!userState.userInfo) {
@@ -47,7 +76,10 @@ const ProfilePage = () => {
 		mode: 'onChange',
 	});
 
-	const submitHandler = (data) => {};
+	const submitHandler = (data) => {
+        const { name, email, password } = data;
+        mutate({ name, email, password });
+    };
 
 	return (
 		<MainLayout>
@@ -123,22 +155,13 @@ const ProfilePage = () => {
 								htmlFor="password"
 								className="text-[#5A7184] font-semibold block"
 							>
-								Password
+								New Password (optional)
 							</label>
 							<input
 								type="password"
 								id="password"
-								{...register('password', {
-									minLength: {
-										value: 6,
-										message: 'Password length must be at least 6 characters',
-									},
-									required: {
-										value: true,
-										message: 'Password is required',
-									},
-								})}
-								placeholder="Enter password"
+								{...register('password')}
+								placeholder="Enter new password"
 								className={`placeholder:text-[#959EAD] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border ${
 									errors.password ? 'border-red-500' : 'border-[#C3CAD9]'
 								}`}
@@ -151,10 +174,10 @@ const ProfilePage = () => {
 						</div>
 						<button
 							type="submit"
-							disabled={!isValid || profileIsLoading}
+							disabled={!isValid || profileIsLoading || updateProfileIsLoading}
 							className="bg-primary text-white font-bold text-lg py-4 px-8 w-full rounded-lg mb-6 disabled:opacity-70 disabled:cursor-not-allowed"
 						>
-							Register
+							Update
 						</button>
 					</form>
 				</div>
