@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getAllPosts = async () => {
 	try {
-		const { data } = await axios.get('/api/post')
+		const { data } = await axios.get('/api/posts');
 		return data;
 	} catch (error) {
 		if (error.response && error.response.data.message)
@@ -11,7 +11,7 @@ export const getAllPosts = async () => {
 	}
 };
 
-export const getSinglePost = async ({slug}) => {
+export const getSinglePost = async ({ slug }) => {
 	try {
 		const { data } = await axios.get(`/api/posts/${slug}`);
 		return data;
