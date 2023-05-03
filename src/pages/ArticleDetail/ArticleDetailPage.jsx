@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { generateHTML } from '@tiptap/html';
+import Bold from '@tiptap/extension-bold';
+// Option 2: Browser-only (lightweight)
+// import { generateHTML } from '@tiptap/core'
+import Document from '@tiptap/extension-document';
+import Paragraph from '@tiptap/extension-paragraph';
+import Text from '@tiptap/extension-text';
+import Italic from '@tiptap/extension-italic';
+import parse from 'html-react-parser';
+
 import MainLayout from '../../components/MainLayout/MainLayout';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs';
-import { images } from '../../constants/index';
-import { Link } from 'react-router-dom';
+import { images, stables } from '../../constants/index';
 import SuggestedPosts from './container/SuggestedPosts';
 import CommentsContainer from '../../components/Comments/CommentsContainer';
 import SocialShareButtons from '../../components/SocialShareButton/SocialShareButtons';
-
-const breadCrumbsData = [
-	{ name: 'Home', link: '/' },
-	{ name: 'Blog', link: '/blog' },
-	{ name: 'Article title', link: '/blog/1' },
-];
+import { useQuery } from '@tanstack/react-query';
+import { getSinglePost } from '../../services/index/posts';
 
 const postsData = [
 	{
@@ -51,6 +57,27 @@ const tagsData = [
 ];
 
 const ArticleDetailPage = () => {
+	const { slug } = useParams();
+	const [breadCrumbsData, setBreadCrumbsData] = useState([]);
+	const [body, setBody] = useState(null);
+
+	const { data } = useQuery({
+		queryFn: () => getSinglePost({ slug }),
+		queryKey: ["blog", slug],
+		onSuccess: (data) => {
+			setBreadCrumbsData([
+				{ name: 'Home', link: '/' },
+				{ name: 'Blog', link: '/blog' },
+				{ name: 'Article title', link: `/blog/${data.slug}` },
+			]);
+			setBody(
+				parse(
+					generateHTML(data?.body, [Bold, Italic, Text, Paragraph, Document]),
+				),
+			);
+		},
+	});
+
 	return (
 		<MainLayout>
 			<section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
@@ -58,29 +85,27 @@ const ArticleDetailPage = () => {
 					<BreadCrumbs data={breadCrumbsData} />
 					<img
 						className="rounded-xl w-full"
-						src={images.PostImage}
-						alt="laptop"
+						src={
+							data?.photo
+								? stables.UPLOAD_FOLDER_BASE_URL + data?.photo
+								: images.samplePostImage
+						}
+						alt={data?.title}
 					/>
-					<Link
-						to="/blog?category=selectedCategory"
-						className="text-primary text-sm font-roboto inline-block mt-4 md:text-base"
-					>
-						EDUCATION
-					</Link>
-					<h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
-						Youths needs to get into better Education
-					</h1>
-					<div className="mt-4 text-dark-soft">
-						<p className="leading-7">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua.
-							Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
-							congue mauris rhoncus aenean vel elit scelerisque. In egestas erat
-							imperdiet sed euismod nisi porta lorem mollis. Morbi tristique
-							senectus et netus. Mattis pellentesque id nibh tortor id aliquet
-							lectus proin.
-						</p>
+					<div className="mt-4 flex gap-2">
+						{data?.categories.map((category) => (
+							<Link
+								to={`/blog?category=${category.name}`}
+								className="text-primary text-sm font-roboto inline-block mt-4 md:text-base"
+							>
+								{category.name}
+							</Link>
+						))}
 					</div>
+					<h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
+						{data?.title}
+					</h1>
+					<div className="mt-4 prose prose-sm sm:prose-base">{body}</div>
 					<CommentsContainer className="mt-10" loggedInUserId="a" />
 				</article>
 				<div>
