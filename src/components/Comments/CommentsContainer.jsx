@@ -35,7 +35,7 @@ const CommentsContainer = ({ className, loggedInUserId, comments }) => {
 						addComment={addCommentHandler}
                         updateComment={updateCommentHandler}
                         deleteComment={deleteCommentHandler}
-                        replies={comments.replies}
+                        replies={comment.replies}
 					/>
 				))}
 			</div>
