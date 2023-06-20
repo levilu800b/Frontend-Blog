@@ -61,13 +61,13 @@ const tagsData = [
 
 const ArticleDetailPage = () => {
 	const { slug } = useParams();
-	const userState = useSelector((state => state.user))
+	const userState = useSelector((state) => state.user);
 	const [breadCrumbsData, setBreadCrumbsData] = useState([]);
 	const [body, setBody] = useState(null);
 
 	const { data, isLoading, isError } = useQuery({
 		queryFn: () => getSinglePost({ slug }),
-		queryKey: ["blog", slug],
+		queryKey: ['blog', slug],
 		onSuccess: (data) => {
 			setBreadCrumbsData([
 				{ name: 'Home', link: '/' },
@@ -115,7 +115,12 @@ const ArticleDetailPage = () => {
 							{data?.title}
 						</h1>
 						<div className="mt-4 prose prose-sm sm:prose-base">{body}</div>
-						<CommentsContainer comments={data?.comments} className="mt-10" loggedInUserId={userState?.userInfo?._id} />
+						<CommentsContainer
+							comments={data?.comments}
+							className="mt-10"
+							loggedInUserId={userState?.userInfo?._id}
+							postSlug={slug}
+						/>
 					</article>
 					<div>
 						<SuggestedPosts
