@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-
 
 import MainLayout from '../../components/MainLayout/MainLayout';
 import { getUserProfile, updateProfile } from '../../services/index/users';
@@ -11,12 +10,10 @@ import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
 import { userActions } from '../../store/reducers/userReducers';
 import { toast } from 'react-hot-toast';
 
-
-
 const ProfilePage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-    const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
 	const userState = useSelector((state) => state.user);
 
 	const {
@@ -30,28 +27,28 @@ const ProfilePage = () => {
 		queryKey: ['profile'],
 	});
 
-    const { mutate, isLoading: updateProfileIsLoading } = useMutation({
-			mutationFn: ({ name, email, password }) => {
-				return updateProfile({
-                    token: userState.userInfo.token,
-                    userData: {
-                        name,
-                        email,
-                        password,
-                    },
-                });
-			},
-			onSuccess: (data) => {
-				dispatch(userActions.setUserInfo(data));
-				localStorage.setItem('account', JSON.stringify(data));
-                queryClient.invalidateQueries(['profile']);
-				toast.success('Profile updated successfully');
-			},
-			onError: (error) => {
-				toast.error(error.message);
-				console.log(error);
-			},
-		});
+	const { mutate, isLoading: updateProfileIsLoading } = useMutation({
+		mutationFn: ({ name, email, password }) => {
+			return updateProfile({
+				token: userState.userInfo.token,
+				userData: {
+					name,
+					email,
+					password,
+				},
+			});
+		},
+		onSuccess: (data) => {
+			dispatch(userActions.setUserInfo(data));
+			localStorage.setItem('account', JSON.stringify(data));
+			queryClient.invalidateQueries(['profile']);
+			toast.success('Profile updated successfully');
+		},
+		onError: (error) => {
+			toast.error(error.message);
+			console.log(error);
+		},
+	});
 
 	useEffect(() => {
 		if (!userState.userInfo) {
@@ -69,23 +66,25 @@ const ProfilePage = () => {
 			email: '',
 			password: '',
 		},
-        values: {
-            name: profileIsLoading ? "" : profileData.name,
-            email: profileIsLoading ? "" : profileData.email,
-        },
+		values: useMemo(() => {
+			return {
+				name: profileIsLoading ? '' : profileData.name,
+				email: profileIsLoading ? '' : profileData.email,
+			};
+		}, [profileData?.email, profileData?.name, profileIsLoading]),
 		mode: 'onChange',
 	});
 
 	const submitHandler = (data) => {
-        const { name, email, password } = data;
-        mutate({ name, email, password });
-    };
+		const { name, email, password } = data;
+		mutate({ name, email, password });
+	};
 
 	return (
 		<MainLayout>
 			<section className="container mx-auto px-5 py-10">
 				<div className="w-full max-w-sm mx-auto">
-                    <ProfilePicture avatar={profileData?.avatar} />
+					<ProfilePicture avatar={profileData?.avatar} />
 					<form onSubmit={handleSubmit(submitHandler)}>
 						<div className="flex flex-col mb-6 w-full">
 							<label
