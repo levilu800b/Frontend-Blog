@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { getAllPosts } from '../../../../services/index/posts';
 import { useQuery } from '@tanstack/react-query';
 import { images, stables } from '../../../../constants';
+import { getAllPosts } from '../../../../services/index/posts';
+import { useEffect, useState } from 'react';
+import Pagination from '../../../../components/Pagination/Pagination';
+
+let isFirstRun = true;
 
 const ManagePosts = () => {
 	const [searchKeyword, setSearchKeyword] = useState('');
@@ -17,6 +20,14 @@ const ManagePosts = () => {
 		queryKey: ['posts'],
 	});
 
+	useEffect(() => {
+		if (isFirstRun) {
+			isFirstRun = false;
+			return;
+		}
+		refetch();
+	}, [refetch, currentPage]);
+
 	const searchKeywordHandler = (e) => {
 		const { value } = e.target;
 		setSearchKeyword(value);
@@ -24,12 +35,14 @@ const ManagePosts = () => {
 
 	const submitSearchKeywordHandler = (e) => {
 		e.preventDefault();
+		setCurrentPage(1);
 		refetch();
 	};
 
 	return (
 		<div>
-			<h1 className="text-2xl font-semibold">Manage Posts</h1>
+			<h1 className="text-2xl font-semibold">Mange Posts</h1>
+
 			<div className="w-full px-4 mx-auto">
 				<div className="py-8">
 					<div className="flex flex-row justify-between w-full mb-1 sm:mb-0">
@@ -108,14 +121,14 @@ const ManagePosts = () => {
 														<div className="flex-shrink-0">
 															<a href="/" className="relative block">
 																<img
-																	alt={post.title}
 																	src={
 																		post?.image
 																			? stables.UPLOAD_FOLDER_BASE_URL +
 																			  post?.image
 																			: images.samplePostImage
 																	}
-																	className="mx-auto object-cover rounded-lg aspect-square w-10 "
+																	alt={post.title}
+																	className="mx-auto object-cover rounded-lg w-10 aspect-square"
 																/>
 															</a>
 														</div>
@@ -130,13 +143,13 @@ const ManagePosts = () => {
 													<p className="text-gray-900 whitespace-no-wrap">
 														{post.categories.length > 0
 															? post.categories[0]
-															: 'Uncategorised'}
+															: 'Uncategorized'}
 													</p>
 												</td>
 												<td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
 													<p className="text-gray-900 whitespace-no-wrap">
 														{new Date(post.createdAt).toLocaleDateString(
-															'en-us',
+															'en-US',
 															{
 																day: 'numeric',
 																month: 'short',
@@ -170,64 +183,15 @@ const ManagePosts = () => {
 									)}
 								</tbody>
 							</table>
-							<div className="flex flex-col items-center px-5 py-5 bg-white xs:flex-row xs:justify-between">
-								<div className="flex items-center">
-									<button
-										type="button"
-										className="w-full p-4 text-base text-gray-600 bg-white border rounded-l-xl hover:bg-gray-100"
-									>
-										<svg
-											width="9"
-											fill="currentColor"
-											height="8"
-											className=""
-											viewBox="0 0 1792 1792"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z"></path>
-										</svg>
-									</button>
-									<button
-										type="button"
-										className="w-full px-4 py-2 text-base text-indigo-500 bg-white border-t border-b hover:bg-gray-100 "
-									>
-										1
-									</button>
-									<button
-										type="button"
-										className="w-full px-4 py-2 text-base text-gray-600 bg-white border hover:bg-gray-100"
-									>
-										2
-									</button>
-									<button
-										type="button"
-										className="w-full px-4 py-2 text-base text-gray-600 bg-white border-t border-b hover:bg-gray-100"
-									>
-										3
-									</button>
-									<button
-										type="button"
-										className="w-full px-4 py-2 text-base text-gray-600 bg-white border hover:bg-gray-100"
-									>
-										4
-									</button>
-									<button
-										type="button"
-										className="w-full p-4 text-base text-gray-600 bg-white border-t border-b border-r rounded-r-xl hover:bg-gray-100"
-									>
-										<svg
-											width="9"
-											fill="currentColor"
-											height="8"
-											className=""
-											viewBox="0 0 1792 1792"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
-										</svg>
-									</button>
-								</div>
-							</div>
+							{!isLoading && (
+								<Pagination
+									onPageChange={(page) => setCurrentPage(page)}
+									currentPage={currentPage}
+									totalPageCount={JSON.parse(
+										postsData?.headers?.['x-totalpagecount'],
+									)}
+								/>
+							)}
 						</div>
 					</div>
 				</div>
