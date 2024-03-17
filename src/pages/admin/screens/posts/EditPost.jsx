@@ -4,7 +4,7 @@ import CreatableSelect from 'react-select/creatable';
 import { getSinglePost, updatePost } from '../../../../services/index/posts';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import ArticleDetailSkeleton from '../../../ArticleDetail/components/ArticleDetailSkeleton';
-import ErrorMessage from '../../../../components/ErrorMessage';
+import ErrorMessage from '../../../../components/ErrorMessage/ErrorMessage';
 import { stables } from '../../../../constants';
 import { HiOutlineCamera } from 'react-icons/hi';
 import { toast } from 'react-hot-toast';
