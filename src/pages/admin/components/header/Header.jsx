@@ -80,7 +80,7 @@ const Header = () => {
           {/* sidebar */}
           <div className="fixed top-0 bottom-0 left-0 z-50 w-3/4 overflow-y-auto bg-white p-4 lg:static lg:h-full lg:w-full lg:p-6">
             <Link to="/">
-              <img src={images.Logo} alt="logo" className="w-16" />
+              <img src={images.logo} alt="logo" className="w-16" />
             </Link>
             <h4 className="mt-10 font-bold text-[#C7C7C7]">MAIN MENU</h4>
             {/* menu items */}
