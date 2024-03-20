@@ -14,28 +14,33 @@ import ManagePosts from './pages/admin/screens/posts/ManagePosts';
 import EditPost from './pages/admin/screens/posts/EditPost';
 import Categories from './pages/admin/screens/categories/Categories';
 import EditCategories from './pages/admin/screens/categories/EditCategories';
+import Users from './pages/admin/screens/users/Users';
 
 function App() {
 	return (
-		<div className="App font-opensans">
-			<Routes>
-				<Route index path="/" element={<HomePage />} />
-				<Route path="/blog/:slug" element={<ArticleDetailPage />} />
-				<Route path="/register" element={<RegisterPage />} />
-				<Route path="/login" element={<LoginPage />} />
-				<Route path="/profile" element={<ProfilePage />} />
-				<Route path="/admin" element={<AdminLayout />}>
-					<Route index element={<Admin />} />
-					<Route path="comments" element={<Comments />} />
-					<Route path="posts/manage" element={<ManagePosts />} />
-					<Route path="categories/manage" element={<Categories />} />
-					<Route path="posts/manage/edit/:slug" element={<EditPost />} />
-					<Route path="categories/manage/edit/:slug" element={<EditCategories />} />
-				</Route>
-			</Routes>
-			<Toaster />
-		</div>
-	);
+    <div className="App font-opensans">
+      <Routes>
+        <Route index path="/" element={<HomePage />} />
+        <Route path="/blog/:slug" element={<ArticleDetailPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Admin />} />
+          <Route path="comments" element={<Comments />} />
+          <Route path="posts/manage" element={<ManagePosts />} />
+          <Route path="categories/manage" element={<Categories />} />
+          <Route path="posts/manage/edit/:slug" element={<EditPost />} />
+          <Route
+            path="categories/manage/edit/:slug"
+            element={<EditCategories />}
+          />
+          <Route path="users/manage" element={<Users />} />
+        </Route>
+      </Routes>
+      <Toaster />
+    </div>
+  );
 }
 
 export default App;
