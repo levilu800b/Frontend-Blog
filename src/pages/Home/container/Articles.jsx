@@ -25,7 +25,7 @@ const Articles = () => {
         {isLoading ? (
           [...Array(3)].map((item, index) => (
             <ArticleCardSkeleton
-              key={index}
+              key={`skeleton-${index}`}
               className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
             />
           ))
