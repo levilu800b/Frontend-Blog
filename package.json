@@ -4,7 +4,7 @@
   "private": true,
   "proxy": {
     "/api": {
-      "target": "https://backend-blog-1op1.onrender.com",
+      "target": "http://localhost:5000",
       "ws": true
     }
   },
