@@ -15,7 +15,7 @@ export const createNewComment = async ({
     };
 
     const { data } = await axios.post(
-      'https://backend-blog-1op1.onrender.com/api/comments',
+      '/api/comments',
       {
         desc,
         slug,
@@ -41,7 +41,7 @@ export const updateComment = async ({ token, desc, check, commentId }) => {
     };
 
     const { data } = await axios.put(
-      `https://backend-blog-1op1.onrender.com/api/comments/${commentId}`,
+      `/api/comments/${commentId}`,
       {
         desc,
         check,
@@ -65,7 +65,7 @@ export const deleteComment = async ({ token, commentId }) => {
     };
 
     const { data } = await axios.delete(
-      `https://backend-blog-1op1.onrender.com/api/comments/${commentId}`,
+      `/api/comments/${commentId}`,
       config
     );
     return data;
@@ -90,7 +90,7 @@ export const getAllComments = async (
     };
 
     const { data, headers } = await axios.get(
-      `https://backend-blog-1op1.onrender.com/api/comments?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`,
+      `/api/comments?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`,
       config
     );
     return { data, headers };

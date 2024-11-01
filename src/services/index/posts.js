@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getAllPosts = async (searchKeyword = '', page = 1, limit = 10) => {
 	try {
 		const { data, headers } = await axios.get(
-      `https://backend-blog-1op1.onrender.com/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
 		return {data, headers};
 	} catch (error) {
@@ -16,7 +16,7 @@ export const getAllPosts = async (searchKeyword = '', page = 1, limit = 10) => {
 export const getSinglePost = async ({ slug }) => {
 	try {
 		const { data } = await axios.get(
-      `https://backend-blog-1op1.onrender.com/api/posts/${slug}`
+      `/api/posts/${slug}`
     );
 		return data;
 	} catch (error) {
@@ -35,7 +35,7 @@ export const deletePost = async ({ slug, token }) => {
 		};
 
 		const { data } = await axios.delete(
-      `https://backend-blog-1op1.onrender.com/api/posts/${slug}`,
+      `/api/posts/${slug}`,
       config
     );
 		return data;
@@ -55,7 +55,7 @@ export const updatePost = async ({ updatedData, slug, token }) => {
     };
 
     const { data } = await axios.put(
-      `https://backend-blog-1op1.onrender.com/api/posts/${slug}`,
+      `/api/posts/${slug}`,
       updatedData,
       config
     );
@@ -76,7 +76,7 @@ export const createPost = async ({ token }) => {
     };
 
     const { data } = await axios.post(
-      `https://backend-blog-1op1.onrender.com/api/posts`,
+      `/api/posts`,
       {},
       config
     );

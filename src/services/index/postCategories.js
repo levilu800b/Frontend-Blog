@@ -7,7 +7,7 @@ export const getAllCategories = async (
 ) => {
   try {
     const { data, headers } = await axios.get(
-      `https://backend-blog-1op1.onrender.com/api/post-categories?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `/api/post-categories?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {
@@ -26,7 +26,7 @@ export const deleteCategory = async ({ slug, token }) => {
     };
 
     const { data } = await axios.delete(
-      `https://backend-blog-1op1.onrender.com/api/post-categories/${slug}`,
+      `/api/post-categories/${slug}`,
       config
     );
     return data;
@@ -46,7 +46,7 @@ export const createCategory = async ({ token, title }) => {
     };
 
     const { data } = await axios.post(
-      `https://backend-blog-1op1.onrender.com/api/post-categories`,
+      `/api/post-categories`,
       { title },
       config
     );
@@ -67,7 +67,7 @@ export const updateCategory = async ({ token, title, slug }) => {
     };
 
     const { data } = await axios.put(
-      `https://backend-blog-1op1.onrender.com/api/post-categories/${slug}`,
+      `/api/post-categories/${slug}`,
       { title },
       config
     );
@@ -82,7 +82,7 @@ export const updateCategory = async ({ token, title, slug }) => {
 export const getSingleCategory = async ({ slug }) => {
   try {
     const { data } = await axios.get(
-      `https://backend-blog-1op1.onrender.com/api/post-categories/${slug}`
+      `/api/post-categories/${slug}`
     );
     return data;
   } catch (error) {

@@ -3,7 +3,7 @@ import axios from 'axios';
 export const signup = async ({ name, email, password }) => {
   try {
     const { data } = await axios.post(
-      'https://backend-blog-1op1.onrender.com/api/users/register',
+      '/api/users/register',
       {
         name,
         email,
@@ -21,7 +21,7 @@ export const signup = async ({ name, email, password }) => {
 export const login = async ({ email, password }) => {
   try {
     const { data } = await axios.post(
-      'https://backend-blog-1op1.onrender.com/api/users/login',
+      '/api/users/login',
       {
         email,
         password,
@@ -44,7 +44,7 @@ export const getUserProfile = async ({ token }) => {
     };
 
     const { data } = await axios.get(
-      'https://backend-blog-1op1.onrender.com/api/users/profile',
+      '/api/users/profile',
       config
     );
     return data;
@@ -64,7 +64,7 @@ export const updateProfile = async ({ token, userData, userId }) => {
     };
 
     const { data } = await axios.put(
-      `https://backend-blog-1op1.onrender.com/api/users/updateProfile/${userId}`,
+      `/api/users/updateProfile/${userId}`,
       userData,
       config
     );
@@ -86,7 +86,7 @@ export const updateProfilePicture = async ({ token, formData }) => {
     };
 
     const { data } = await axios.put(
-      'https://backend-blog-1op1.onrender.com/api/users/updateProfilePicture',
+      '/api/users/updateProfilePicture',
       formData,
       config
     );
@@ -112,7 +112,7 @@ export const getAllUsers = async (
     };
 
     const { data, headers } = await axios.get(
-      `https://backend-blog-1op1.onrender.com/api/users?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`,
+      `/api/users?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`,
       config
     );
     return { data, headers };
@@ -132,7 +132,7 @@ export const deleteUser = async ({ slug, token }) => {
     };
 
     const { data } = await axios.delete(
-      `https://backend-blog-1op1.onrender.com/api/users/${slug}`,
+      `/api/users/${slug}`,
       config
     );
     return data;
