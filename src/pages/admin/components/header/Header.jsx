@@ -59,7 +59,7 @@ const Header = () => {
     <header className="flex h-fit w-full items-center justify-between p-4 lg:h-full lg:max-w-[300px] lg:flex-col lg:items-start lg:justify-start lg:p-0">
       {/* logo */}
       <Link to="/">
-        <img src={images.Logo} alt="logo" className="w-16 lg:hidden" />
+        <img src={images.logo} alt="logo" className="w-16 lg:hidden" />
       </Link>
       {/* menu burger icon */}
       <div className="cursor-pointer lg:hidden">
